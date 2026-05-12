@@ -1,0 +1,178 @@
+---
+title: Number Methods
+icon: 🔢
+---
+
+Lodash 提供了一组专注于数字处理的工具方法，帮助你在数值边界控制、范围判断与随机数生成等常见场景中写出更简洁、可靠的代码。本章将介绍 `Number` 模块下的核心 API。
+
+## clamp
+
+将数值限制在指定区间内，如果数值小于最小值则返回最小值，大于最大值则返回最大值，否则返回原值。
+
+```ts
+_.clamp(number, lower, upper)
+```
+
+<Table>
+    <TableRow>
+        <TableCell>
+            参数
+        </TableCell>
+        <TableCell>
+            说明
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            number
+        </TableCell>
+        <TableCell>
+            待限制的数值
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            lower
+        </TableCell>
+        <TableCell>
+            区间下限
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            upper
+        </TableCell>
+        <TableCell>
+            区间上限
+        </TableCell>
+    </TableRow>
+</Table>
+
+返回值：限制在 `[lower, upper]` 区间内的数值。
+
+示例：
+
+```ts
+_.clamp(-10, 0, 5);   // => 0
+_.clamp(10, 0, 5);    // => 5
+_.clamp(3, 0, 5);     // => 3
+```
+
+## inRange
+
+判断数值是否位于指定区间内，支持左闭右开或全闭区间（当 `upper` 小于 `lower` 时会自动交换边界）。
+
+```ts
+_.inRange(number, start, end)
+```
+
+<Table>
+    <TableRow>
+        <TableCell>
+            参数
+        </TableCell>
+        <TableCell>
+            说明
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            number
+        </TableCell>
+        <TableCell>
+            待判断的数值
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            start
+        </TableCell>
+        <TableCell>
+            区间起始值
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            end
+        </TableCell>
+        <TableCell>
+            区间结束值（可选，默认值为 `start`，此时 `start` 视为 `0`）
+        </TableCell>
+    </TableRow>
+</Table>
+
+返回值：`true` 表示数值在区间内，否则返回 `false`。
+
+示例：
+
+```ts
+_.inRange(3, 2, 4);     // => true
+_.inRange(1, 2, 4);     // => false
+_.inRange(4, 2, 4);     // => false
+_.inRange(4, 4);        // => true
+_.inRange(2, 4, 2);     // => true（自动交换边界）
+```
+
+## random
+
+生成一个在指定范围内的随机浮点数或整数。
+
+```ts
+_.random(lower, upper, floating)
+```
+
+<Table>
+    <TableRow>
+        <TableCell>
+            参数
+        </TableCell>
+        <TableCell>
+            说明
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            lower
+        </TableCell>
+        <TableCell>
+            下限（可选，默认值为 `0`）
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            upper
+        </TableCell>
+        <TableCell>
+            上限
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            floating
+        </TableCell>
+        <TableCell>
+            是否返回浮点数（可选，默认根据参数自动判断）
+        </TableCell>
+    </TableRow>
+</Table>
+
+返回值：位于 `[lower, upper]` 区间内的随机数。
+
+示例：
+
+```ts
+_.random(0, 5);        // => 0 到 5 之间的整数
+_.random(5);           // => 0 到 5 之间的整数
+_.random(1.2, 5.2);    // => 1.2 到 5.2 之间的浮点数
+_.random(0, 5, true);  // => 0 到 5 之间的浮点数
+```
+
+## 相关参考
+
+你可以继续浏览以下相关页面：
+
+<BulletedList>
+    <Link href="/api-reference/math">Math Methods</Link>
+</BulletedList>
+
+也可以回到 <Link href="/api-reference">API Reference</Link> 总览页查看全部模块。
