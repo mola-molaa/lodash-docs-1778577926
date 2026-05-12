@@ -1,0 +1,810 @@
+---
+title: Math Methods
+icon: 🧮
+---
+
+# Math Methods
+
+Lodash 提供了一系列数学相关工具方法，用于数值计算、极值统计、取整、求和、均值等常见数学场景。以下为 `lodash/math` 模块相关 API 的详细说明。
+
+---
+
+## add
+
+用于将两个数值相加。
+
+**签名**
+```
+add(augend, addend)
+```
+
+**参数**
+<Table>
+    <TableRow>
+        <TableCell>
+            参数名
+        </TableCell>
+        <TableCell>
+            类型
+        </TableCell>
+        <TableCell>
+            说明
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            augend
+        </TableCell>
+        <TableCell>
+            number
+        </TableCell>
+        <TableCell>
+            被加数
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            addend
+        </TableCell>
+        <TableCell>
+            number
+        </TableCell>
+        <TableCell>
+            加数
+        </TableCell>
+    </TableRow>
+</Table>
+
+**示例**
+```javascript
+add(6, 4)
+// => 10
+```
+
+---
+
+## ceil
+
+根据精度对数值进行向上取整。
+
+**签名**
+```
+ceil(number, precision)
+```
+
+**参数**
+<Table>
+    <TableRow>
+        <TableCell>
+            参数名
+        </TableCell>
+        <TableCell>
+            类型
+        </TableCell>
+        <TableCell>
+            说明
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            number
+        </TableCell>
+        <TableCell>
+            number
+        </TableCell>
+        <TableCell>
+            待处理数值
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            precision
+        </TableCell>
+        <TableCell>
+            number
+        </TableCell>
+        <TableCell>
+            精度，默认为 0
+        </TableCell>
+    </TableRow>
+</Table>
+
+**示例**
+```javascript
+ceil(4.006)
+// => 5
+
+ceil(6.004, 2)
+// => 6.01
+
+ceil(6040, -2)
+// => 6100
+```
+
+---
+
+## divide
+
+将两个数值相除。
+
+**签名**
+```
+divide(dividend, divisor)
+```
+
+**参数**
+<Table>
+    <TableRow>
+        <TableCell>
+            参数名
+        </TableCell>
+        <TableCell>
+            类型
+        </TableCell>
+        <TableCell>
+            说明
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            dividend
+        </TableCell>
+        <TableCell>
+            number
+        </TableCell>
+        <TableCell>
+            被除数
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            divisor
+        </TableCell>
+        <TableCell>
+            number
+        </TableCell>
+        <TableCell>
+            除数
+        </TableCell>
+    </TableRow>
+</Table>
+
+**示例**
+```javascript
+divide(6, 4)
+// => 1.5
+```
+
+---
+
+## floor
+
+根据精度对数值进行向下取整。
+
+**签名**
+```
+floor(number, precision)
+```
+
+**参数**
+<Table>
+    <TableRow>
+        <TableCell>
+            参数名
+        </TableCell>
+        <TableCell>
+            类型
+        </TableCell>
+        <TableCell>
+            说明
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            number
+        </TableCell>
+        <TableCell>
+            number
+        </TableCell>
+        <TableCell>
+            待处理数值
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            precision
+        </TableCell>
+        <TableCell>
+            number
+        </TableCell>
+        <TableCell>
+            精度，默认为 0
+        </TableCell>
+    </TableRow>
+</Table>
+
+**示例**
+```javascript
+floor(4.006)
+// => 4
+
+floor(0.046, 2)
+// => 0.04
+
+floor(4060, -2)
+// => 4000
+```
+
+---
+
+## max
+
+计算数组中的最大值。
+
+**签名**
+```
+max(array)
+```
+
+**参数**
+<Table>
+    <TableRow>
+        <TableCell>
+            参数名
+        </TableCell>
+        <TableCell>
+            类型
+        </TableCell>
+        <TableCell>
+            说明
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            array
+        </TableCell>
+        <TableCell>
+            Array
+        </TableCell>
+        <TableCell>
+            待计算的数组
+        </TableCell>
+    </TableRow>
+</Table>
+
+**示例**
+```javascript
+max([4, 2, 8, 6])
+// => 8
+```
+
+---
+
+## maxBy
+
+根据迭代器函数计算数组中的最大值。
+
+**签名**
+```
+maxBy(array, iteratee)
+```
+
+**参数**
+<Table>
+    <TableRow>
+        <TableCell>
+            参数名
+        </TableCell>
+        <TableCell>
+            类型
+        </TableCell>
+        <TableCell>
+            说明
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            array
+        </TableCell>
+        <TableCell>
+            Array
+        </TableCell>
+        <TableCell>
+            待计算的数组
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            iteratee
+        </TableCell>
+        <TableCell>
+            Function
+        </TableCell>
+        <TableCell>
+            用于计算每个元素的迭代器
+        </TableCell>
+    </TableRow>
+</Table>
+
+**示例**
+```javascript
+const objects = [{ n: 1 }, { n: 2 }]
+maxBy(objects, o => o.n)
+// => { n: 2 }
+```
+
+---
+
+## mean
+
+计算数组的平均值。
+
+**签名**
+```
+mean(array)
+```
+
+**参数**
+<Table>
+    <TableRow>
+        <TableCell>
+            参数名
+        </TableCell>
+        <TableCell>
+            类型
+        </TableCell>
+        <TableCell>
+            说明
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            array
+        </TableCell>
+        <TableCell>
+            Array
+        </TableCell>
+        <TableCell>
+            待计算的数组
+        </TableCell>
+    </TableRow>
+</Table>
+
+**示例**
+```javascript
+mean([4, 2, 8, 6])
+// => 5
+```
+
+---
+
+## meanBy
+
+根据迭代器函数计算数组的平均值。
+
+**签名**
+```
+meanBy(array, iteratee)
+```
+
+**参数**
+<Table>
+    <TableRow>
+        <TableCell>
+            参数名
+        </TableCell>
+        <TableCell>
+            类型
+        </TableCell>
+        <TableCell>
+            说明
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            array
+        </TableCell>
+        <TableCell>
+            Array
+        </TableCell>
+        <TableCell>
+            待计算的数组
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            iteratee
+        </TableCell>
+        <TableCell>
+            Function
+        </TableCell>
+        <TableCell>
+            用于计算每个元素的迭代器
+        </TableCell>
+    </TableRow>
+</Table>
+
+**示例**
+```javascript
+const objects = [{ n: 4 }, { n: 2 }, { n: 8 }, { n: 6 }]
+meanBy(objects, o => o.n)
+// => 5
+```
+
+---
+
+## min
+
+计算数组中的最小值。
+
+**签名**
+```
+min(array)
+```
+
+**参数**
+<Table>
+    <TableRow>
+        <TableCell>
+            参数名
+        </TableCell>
+        <TableCell>
+            类型
+        </TableCell>
+        <TableCell>
+            说明
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            array
+        </TableCell>
+        <TableCell>
+            Array
+        </TableCell>
+        <TableCell>
+            待计算的数组
+        </TableCell>
+    </TableRow>
+</Table>
+
+**示例**
+```javascript
+min([4, 2, 8, 6])
+// => 2
+```
+
+---
+
+## minBy
+
+根据迭代器函数计算数组中的最小值。
+
+**签名**
+```
+minBy(array, iteratee)
+```
+
+**参数**
+<Table>
+    <TableRow>
+        <TableCell>
+            参数名
+        </TableCell>
+        <TableCell>
+            类型
+        </TableCell>
+        <TableCell>
+            说明
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            array
+        </TableCell>
+        <TableCell>
+            Array
+        </TableCell>
+        <TableCell>
+            待计算的数组
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            iteratee
+        </TableCell>
+        <TableCell>
+            Function
+        </TableCell>
+        <TableCell>
+            用于计算每个元素的迭代器
+        </TableCell>
+    </TableRow>
+</Table>
+
+**示例**
+```javascript
+const objects = [{ n: 1 }, { n: 2 }]
+minBy(objects, o => o.n)
+// => { n: 1 }
+```
+
+---
+
+## multiply
+
+将两个数值相乘。
+
+**签名**
+```
+multiply(multiplier, multiplicand)
+```
+
+**参数**
+<Table>
+    <TableRow>
+        <TableCell>
+            参数名
+        </TableCell>
+        <TableCell>
+            类型
+        </TableCell>
+        <TableCell>
+            说明
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            multiplier
+        </TableCell>
+        <TableCell>
+            number
+        </TableCell>
+        <TableCell>
+            乘数
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            multiplicand
+        </TableCell>
+        <TableCell>
+            number
+        </TableCell>
+        <TableCell>
+            被乘数
+        </TableCell>
+    </TableRow>
+</Table>
+
+**示例**
+```javascript
+multiply(6, 4)
+// => 24
+```
+
+---
+
+## round
+
+根据精度对数值进行四舍五入。
+
+**签名**
+```
+round(number, precision)
+```
+
+**参数**
+<Table>
+    <TableRow>
+        <TableCell>
+            参数名
+        </TableCell>
+        <TableCell>
+            类型
+        </TableCell>
+        <TableCell>
+            说明
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            number
+        </TableCell>
+        <TableCell>
+            number
+        </TableCell>
+        <TableCell>
+            待处理数值
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            precision
+        </TableCell>
+        <TableCell>
+            number
+        </TableCell>
+        <TableCell>
+            精度，默认为 0
+        </TableCell>
+    </TableRow>
+</Table>
+
+**示例**
+```javascript
+round(4.006)
+// => 4
+
+round(4.006, 2)
+// => 4.01
+
+round(4060, -2)
+// => 4100
+```
+
+---
+
+## subtract
+
+将两个数值相减。
+
+**签名**
+```
+subtract(minuend, subtrahend)
+```
+
+**参数**
+<Table>
+    <TableRow>
+        <TableCell>
+            参数名
+        </TableCell>
+        <TableCell>
+            类型
+        </TableCell>
+        <TableCell>
+            说明
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            minuend
+        </TableCell>
+        <TableCell>
+            number
+        </TableCell>
+        <TableCell>
+            被减数
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            subtrahend
+        </TableCell>
+        <TableCell>
+            number
+        </TableCell>
+        <TableCell>
+            减数
+        </TableCell>
+    </TableRow>
+</Table>
+
+**示例**
+```javascript
+subtract(6, 4)
+// => 2
+```
+
+---
+
+## sum
+
+计算数组中所有数值的总和。
+
+**签名**
+```
+sum(array)
+```
+
+**参数**
+<Table>
+    <TableRow>
+        <TableCell>
+            参数名
+        </TableCell>
+        <TableCell>
+            类型
+        </TableCell>
+        <TableCell>
+            说明
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            array
+        </TableCell>
+        <TableCell>
+            Array
+        </TableCell>
+        <TableCell>
+            待计算的数组
+        </TableCell>
+    </TableRow>
+</Table>
+
+**示例**
+```javascript
+sum([4, 2, 8, 6])
+// => 20
+```
+
+---
+
+## sumBy
+
+根据迭代器函数计算数组中所有元素的总和。
+
+**签名**
+```
+sumBy(array, iteratee)
+```
+
+**参数**
+<Table>
+    <TableRow>
+        <TableCell>
+            参数名
+        </TableCell>
+        <TableCell>
+            类型
+        </TableCell>
+        <TableCell>
+            说明
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            array
+        </TableCell>
+        <TableCell>
+            Array
+        </TableCell>
+        <TableCell>
+            待计算的数组
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            iteratee
+        </TableCell>
+        <TableCell>
+            Function
+        </TableCell>
+        <TableCell>
+            用于计算每个元素的迭代器
+        </TableCell>
+    </TableRow>
+</Table>
+
+**示例**
+```javascript
+const objects = [{ n: 4 }, { n: 2 }, { n: 8 }, { n: 6 }]
+sumBy(objects, o => o.n)
+// => 20
+```
+
+---
+
+## 相关阅读
+
+<BulletedList>
+    查看 <Link href="/api-reference/number">Number Methods</Link> 了解数值相关工具方法
+</BulletedList>
+<BulletedList>
+    查看 <Link href="/api-reference/array">Array Methods</Link> 了解数组相关工具方法
+</BulletedList>
+<BulletedList>
+    查看 <Link href="/index">Lodash 文档首页</Link> 获取完整 API 索引
+</BulletedList>
