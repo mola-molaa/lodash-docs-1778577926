@@ -1,0 +1,192 @@
+---
+title: FP Guide
+icon: λ
+---
+
+# Lodash/fp 模块简介
+
+<Paragraph>
+    <Mark bold>Lodash/fp</Mark> 是 Lodash 提供的一个函数式编程风格变体模块，它将 Lodash 中大部分常用方法重新导出为更符合函数式编程（Functional Programming，简称 FP）习惯的版本。与默认 Lodash 方法相比，fp 模块的核心特性包括<Mark bold>自动柯里化</Mark>、<Mark bold>参数顺序调整（data-last）</Mark>以及更统一的 API 设计，方便开发者在函数式管线（pipeline）中组合使用。
+</Paragraph>
+
+<Divider />
+
+# 核心特性
+
+## 自动柯里化
+
+<Paragraph>
+    在 Lodash/fp 中，绝大多数函数都默认支持<Mark bold>柯里化（Currying）</Mark>：即函数可以接收部分参数并返回一个等待剩余参数的新函数，直到所有参数都传入后才执行计算。这种特性非常适合将多个小函数组合成更复杂的逻辑，避免一次性传入所有参数带来的代码臃肿。
+</Paragraph>
+
+<Paragraph>
+    例如，默认的 Lodash <Mark color="blue">map</Mark> 方法需要同时传入迭代函数和数组才能执行；而在 fp 模块中，你可以先传入迭代函数得到一个新的函数，再将数组传入完成计算：
+</Paragraph>
+
+<BlockQuote>
+    柯里化让函数可以「分步调用」，是函数式编程中函数组合的基础能力之一。
+</BlockQuote>
+
+## 参数顺序调整（data-last）
+
+<Paragraph>
+    Lodash/fp 对函数的参数顺序做了统一调整，采用<Mark bold>数据最后（data-last）</Mark>的设计：即需要被处理的数据（如数组、对象等）永远放在参数列表的最后一位，而操作该数据的函数、配置等参数放在前面。
+</Paragraph>
+
+<Paragraph>
+    这种调整的好处是，当你需要组合多个操作时，可以先固定前面的操作参数，最后统一传入数据，让代码更符合「从操作到数据」的阅读顺序，也更容易和 <Mark color="blue">flow</Mark>、<Mark color="blue">pipe</Mark> 这类组合函数配合使用。
+</Paragraph>
+
+<Paragraph>
+    对比默认 Lodash 和 fp 模块的参数顺序差异：
+</Paragraph>
+
+<Table>
+    <TableRow>
+        <TableCell>
+            模块类型
+        </TableCell>
+        <TableCell>
+            函数示例
+        </TableCell>
+        <TableCell>
+            参数顺序
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            默认 Lodash
+        </TableCell>
+        <TableCell>
+            <Mark color="blue">map</Mark>(collection, iteratee)
+        </TableCell>
+        <TableCell>
+            数据在前，操作函数在后
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            Lodash/fp
+        </TableCell>
+        <TableCell>
+            <Mark color="blue">map</Mark>(iteratee, collection)
+        </TableCell>
+        <TableCell>
+            操作函数在前，数据在后
+        </TableCell>
+    </TableRow>
+</Table>
+
+<Divider />
+
+# 与 Ramda 风格 API 的对应关系
+
+<Paragraph>
+    Lodash/fp 的设计初衷之一就是为了提供一套和 <Mark bold>Ramda</Mark> 风格接近的函数式 API，降低熟悉 Ramda 的开发者迁移到 Lodash 生态的成本。两者在核心设计理念上高度相似：都以柯里化、data-last 为基础，都提供了丰富的函数组合工具。
+</Paragraph>
+
+<Paragraph>
+    以下是部分常用函数在 Lodash/fp 和 Ramda 中的对应关系：
+</Paragraph>
+
+<Table>
+    <TableRow>
+        <TableCell>
+            功能分类
+        </TableCell>
+        <TableCell>
+            Lodash/fp 函数
+        </TableCell>
+        <TableCell>
+            Ramda 对应函数
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            数组映射
+        </TableCell>
+        <TableCell>
+            <Mark color="blue">map</Mark>
+        </TableCell>
+        <TableCell>
+            R.map
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            数组过滤
+        </TableCell>
+        <TableCell>
+            <Mark color="blue">filter</Mark>
+        </TableCell>
+        <TableCell>
+            R.filter
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            数组规约
+        </TableCell>
+        <TableCell>
+            <Mark color="blue">reduce</Mark>
+        </TableCell>
+        <TableCell>
+            R.reduce
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            函数组合
+        </TableCell>
+        <TableCell>
+            <Mark color="blue">flow</Mark> / <Mark color="blue">pipe</Mark>
+        </TableCell>
+        <TableCell>
+            R.compose / R.pipe
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            函数柯里化
+        </TableCell>
+        <TableCell>
+            <Mark color="blue">curry</Mark>
+        </TableCell>
+        <TableCell>
+            R.curry
+        </TableCell>
+    </TableRow>
+</Table>
+
+<Paragraph>
+    需要注意的是，虽然两者风格接近，但在部分函数的参数细节、边界行为上仍存在差异，实际使用时建议参考对应模块的官方文档确认具体行为。
+</Paragraph>
+
+<Divider />
+
+# 使用建议
+
+<Paragraph>
+    如果你已经熟悉函数式编程范式，或者需要在项目中编写大量可组合、无副作用的数据处理逻辑，Lodash/fp 会是一个更合适的选择。你可以先从简单的数组操作（如 <Mark color="blue">map</Mark>、<Mark color="blue">filter</Mark>、<Mark color="blue">reduce</Mark>）开始尝试，再逐步使用 <Mark color="blue">flow</Mark> 等组合函数构建更复杂的处理管线。
+</Paragraph>
+
+<Paragraph>
+    如果需要了解 Lodash 的整体架构设计，可以查看 <Link href="concepts/architecture">架构概览</Link> 页面；如果需要查看具体函数的用法，可以前往对应模块参考文档：
+</Paragraph>
+
+<BulletedList>
+    <Link href="api-reference/array">数组相关 API</Link>
+</BulletedList>
+<BulletedList>
+    <Link href="api-reference/collection">集合相关 API</Link>
+</BulletedList>
+<BulletedList>
+    <Link href="api-reference/object">对象相关 API</Link>
+</BulletedList>
+<BulletedList>
+    <Link href="api-reference/function">函数相关 API</Link>
+</BulletedList>
+
+<Paragraph>
+    更多 Lodash 基础使用内容也可以参考 <Link href="quickstart">快速上手</Link> 和 <Link href="installation">安装指南</Link> 页面。
+</Paragraph>
