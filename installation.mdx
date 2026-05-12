@@ -1,0 +1,228 @@
+---
+title: Installation
+icon: 📦
+---
+
+Lodash 是一个一致性、模块化、高性能的 JavaScript 实用工具库，为开发者提供了大量开箱即用的工具函数。在开始使用 Lodash 之前，需要选择适合你项目场景的安装方式。本文将详细介绍 Lodash 的各类安装方法，以及不同构建版本的差异与选择建议。
+
+## 包管理器安装
+
+这是现代前端项目中最推荐的安装方式，能够很好地配合构建工具（如 Webpack、Vite、Rollup 等）使用，支持按需引入和 Tree Shaking。
+
+### npm
+
+如果你的项目使用 npm 作为包管理工具，可以在项目根目录执行以下命令安装 Lodash：
+
+```bash
+npm install lodash
+```
+
+安装完成后，即可在代码中引入使用：
+
+```javascript
+// 完整引入
+const _ = require('lodash');
+// 或者 ES Module 引入
+import _ from 'lodash';
+
+// 调用工具函数
+_.chunk(['a', 'b', 'c', 'd'], 2);
+// => [['a', 'b'], ['c', 'd']]
+```
+
+### yarn
+
+使用 yarn 的开发者可以执行以下命令：
+
+```bash
+yarn add lodash
+```
+
+### pnpm
+
+使用 pnpm 的开发者可以执行以下命令：
+
+```bash
+pnpm add lodash
+```
+
+## 浏览器直接引入
+
+如果你的项目不是基于构建工具的前端工程，而是传统的前端页面，也可以直接在浏览器中引入 Lodash。
+
+### 使用 CDN
+
+你可以通过主流 CDN 服务直接引入 Lodash 的 UMD 版本：
+
+```html
+<!-- 引入完整版 Lodash -->
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+
+<!-- 引入后会在全局暴露 _ 变量 -->
+<script>
+  console.log(_.VERSION); // 输出当前 Lodash 版本
+  const result = _.chunk(['a', 'b', 'c', 'd'], 2);
+  console.log(result); // [['a', 'b'], ['c', 'd']]
+</script>
+```
+
+你也可以指定引入特定的模块，减少加载体积：
+
+```html
+<!-- 仅引入 chunk 方法 -->
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/chunk.min.js"></script>
+<script>
+  console.log(_.chunk(['a', 'b', 'c', 'd'], 2));
+</script>
+```
+
+### 本地文件引入
+
+你也可以从官网或 npm 包中下载 Lodash 的文件，放到项目的静态资源目录，然后本地引入：
+
+```html
+<script src="/static/js/lodash.min.js"></script>
+```
+
+## 不同构建版本说明
+
+Lodash 提供了多种构建版本，你可以根据项目需求选择合适的版本，避免引入不必要的代码。
+
+### 完整版（Full Build）
+
+完整版包含了 Lodash 的所有工具函数，适合需要用到大量 Lodash 功能，且不关心包体积的场景，或者快速验证功能的 demo 项目。
+
+通过包管理器安装的默认就是完整版：
+
+```javascript
+import _ from 'lodash';
+// 可使用所有 Lodash 提供的函数
+_.array.diff([1, 2, 3], [2, 3, 4]);
+_.object.keys({ 'a': 1, 'b': 2 });
+```
+
+### 核心版（Core Build）
+
+核心版仅包含 Lodash 最核心的工具函数，移除了一些不常用的功能，体积更小。如果你的项目仅用到基础工具函数，可以选择核心版。
+
+安装核心版：
+
+```bash
+npm install lodash-core
+```
+
+使用方式：
+
+```javascript
+import _ from 'lodash-core';
+// 仅可使用核心函数，部分不常用函数会不存在
+```
+
+### FP 版（Functional Programming Build）
+
+FP 版是 Lodash 的函数式编程风格版本，所有函数都自动柯里化，并且参数顺序经过调整，更适合函数式编程场景，方便进行函数组合。
+
+如果你需要使用 Lodash 的函数式编程能力，可以安装 FP 版本：
+
+```bash
+npm install lodash/fp
+```
+
+使用方式：
+
+```javascript
+import fp from 'lodash/fp';
+
+// FP 版函数默认柯里化，支持部分参数应用
+const add = fp.add(1);
+add(2); // => 3
+
+// 参数顺序调整为数据最后传入，更适合 compose
+const process = fp.compose(fp.join(','), fp.map(fp.toUpper));
+process(['a', 'b', 'c']); // => 'A,B,C'
+```
+
+关于 FP 版的更多设计理念和使用方法，可以参考 <Link href="concepts/fp">函数式编程概念</Link> 页面。
+
+## 版本选择建议
+
+你可以根据以下场景选择合适的 Lodash 版本：
+
+<Table>
+    <TableRow>
+        <TableCell>
+            使用场景
+        </TableCell>
+        <TableCell>
+            推荐版本
+        </TableCell>
+        <TableCell>
+            原因
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            现代前端工程，需要完整功能
+        </TableCell>
+        <TableCell>
+            完整版（默认 lodash 包）
+        </TableCell>
+        <TableCell>
+            功能全，配合构建工具可做按需引入，兼顾开发效率和功能覆盖
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            对包体积敏感，仅用基础功能
+        </TableCell>
+        <TableCell>
+            核心版（lodash-core）
+        </TableCell>
+        <TableCell>
+            体积更小，减少项目打包体积
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            函数式编程项目，需要柯里化工具函数
+        </TableCell>
+        <TableCell>
+            FP 版（lodash/fp）
+        </TableCell>
+        <TableCell>
+            原生支持柯里化，参数顺序适配函数组合，更适合 FP 范式
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            传统浏览器项目，无构建工具
+        </TableCell>
+        <TableCell>
+            CDN 引入完整版 UMD 文件
+        </TableCell>
+        <TableCell>
+            无需配置构建工具，直接全局可用，快速集成
+        </TableCell>
+    </TableRow>
+</Table>
+
+## 按需引入优化
+
+如果你的项目使用构建工具，且安装了完整版 Lodash，推荐按具体方法引入，减少最终打包体积：
+
+```javascript
+// 不推荐：完整引入整个库
+import _ from 'lodash';
+
+// 推荐：仅引入需要的方法
+import chunk from 'lodash/chunk';
+import debounce from 'lodash/debounce';
+
+chunk(['a', 'b', 'c', 'd'], 2);
+```
+
+如果你使用 babel，也可以配合 <Mark bold>babel-plugin-lodash</Mark> 插件自动完成按需引入的转换，无需手动修改引入路径。
+
+## 下一步
+
+安装完成后，你可以参考 <Link href="quickstart">快速上手</Link> 页面了解 Lodash 的基础使用方法，或者查看 <Link href="concepts/architecture">架构设计</Link> 页面了解 Lodash 的内部结构，也可以直接进入 <Link href="api-reference/array">API 参考</Link> 查看具体函数的使用方法。
