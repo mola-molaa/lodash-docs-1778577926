@@ -1,0 +1,398 @@
+---
+title: Collection Methods
+icon: 📦
+---
+
+# Collection Methods
+
+Lodash 提供了丰富的集合（Collection）操作方法，用于高效处理数组与对象等可迭代数据结构。本页面将逐一介绍常用的集合相关 API，并给出典型用法示例与说明。
+
+---
+
+## countBy
+
+创建一个对象，对象的 key 是经过 `iteratee` 处理后的结果，value 是产生该 key 的原集合元素个数。
+
+```javascript
+_.countBy([6.1, 4.2, 6.3], Math.floor);
+// => { '4': 1, '6': 2 }
+
+_.countBy(['one', 'two', 'three'], 'length');
+// => { '3': 2, '5': 1 }
+```
+
+---
+
+## forEach
+
+遍历集合中的每个元素，`iteratee` 会接收三个参数：(value, index|key, collection)。如果 `iteratee` 返回 `false`，遍历会提前结束。
+
+```javascript
+_([1, 2]).forEach(function(value) {
+  console.log(value);
+});
+// => 输出 1 然后 2
+
+_.forEach({ 'a': 1, 'b': 2 }, function(value, key) {
+  console.log(key);
+});
+// => 输出 'a' 然后 'b'
+```
+
+---
+
+## every
+
+检查集合中的所有元素是否都通过 `predicate` 的断言检查，全部通过则返回 `true`，否则返回 `false`。
+
+```javascript
+_.every([true, 1, null, 'yes'], Boolean);
+// => false
+
+var users = [
+  { 'user': 'barney', 'active': false },
+  { 'user': 'fred',   'active': false }
+];
+
+_.every(users, { 'active': false });
+// => true
+```
+
+---
+
+## filter
+
+遍历集合，返回所有通过 `predicate` 断言检查的元素组成的新数组。
+
+```javascript
+var users = [
+  { 'user': 'barney', 'age': 36, 'active': true },
+  { 'user': 'fred',   'age': 40, 'active': false }
+];
+
+_.filter(users, function(o) { return !o.active; });
+// => [{ 'user': 'fred', 'age': 40, 'active': false }]
+
+_.filter(users, { 'age': 36 });
+// => [{ 'user': 'barney', 'age': 36, 'active': true }]
+```
+
+---
+
+## find
+
+遍历集合，返回第一个通过 `predicate` 断言检查的元素。如果未找到返回 `undefined`。
+
+```javascript
+var users = [
+  { 'user': 'barney',  'age': 36, 'active': true },
+  { 'user': 'fred',    'age': 40, 'active': false },
+  { 'user': 'pebbles', 'age': 1,  'active': true }
+];
+
+_.find(users, function(o) { return o.age < 40; });
+// => { 'user': 'barney', 'age': 36, 'active': true }
+
+_.find(users, { 'active': false });
+// => { 'user': 'fred', 'age': 40, 'active': false }
+```
+
+---
+
+## flatMap
+
+先对集合中的每个元素应用 `iteratee`，然后将结果扁平化一层，返回新数组。
+
+```javascript
+function duplicate(n) {
+  return [n, n];
+}
+
+_.flatMap([1, 2], duplicate);
+// => [1, 1, 2, 2]
+
+_.flatMap([1, 2], n => [[n, n]]);
+// => [[1, 1], [2, 2]]
+```
+
+---
+
+## groupBy
+
+创建一个对象，key 是经过 `iteratee` 处理的结果，value 是产生该 key 的原集合元素组成的数组。
+
+```javascript
+_.groupBy([6.1, 4.2, 6.3], Math.floor);
+// => { '4': [4.2], '6': [6.1, 6.3] }
+
+_.groupBy(['one', 'two', 'three'], 'length');
+// => { '3': ['one', 'two'], '5': ['three'] }
+```
+
+---
+
+## includes
+
+检查 `value` 是否在集合中，如果集合是字符串则检查是否包含子串。
+
+```javascript
+_.includes([1, 2, 3], 1);
+// => true
+
+_.includes({ 'a': 1, 'b': 2 }, 1);
+// => true
+
+_.includes('pebbles', 'eb');
+// => true
+```
+
+---
+
+## invokeMap
+
+调用集合中每个元素的指定方法，`method` 可以是函数或方法名，后续参数会传给该方法。
+
+```javascript
+_.invokeMap([[5, 1, 7], [3, 2, 1]], 'sort');
+// => [[1, 5, 7], [1, 2, 3]]
+
+_.invokeMap([123, 456], Number.prototype.toFixed, 2);
+// => ['123.00', '456.00']
+```
+
+---
+
+## keyBy
+
+创建一个对象，key 是 `iteratee` 处理每个元素后的结果，value 是对应的原元素。如果多个元素产生相同 key，后面的会覆盖前面的。
+
+```javascript
+var array = [
+  { 'dir': 'left', 'code': 97 },
+  { 'dir': 'right', 'code': 100 }
+];
+
+_.keyBy(array, function(o) {
+  return String.fromCharCode(o.code);
+});
+// => { 'a': { 'dir': 'left', 'code': 97 }, 'd': { 'dir': 'right', 'code': 100 } }
+
+_.keyBy(array, 'dir');
+// => { 'left': { 'dir': 'left', 'code': 97 }, 'right': { 'dir': 'right', 'code': 100 } }
+```
+
+---
+
+## map
+
+创建一个新数组，包含集合中每个元素经过 `iteratee` 处理后的结果。
+
+```javascript
+function square(n) {
+  return n * n;
+}
+
+_.map([4, 8], square);
+// => [16, 64]
+
+_.map({ 'a': 4, 'b': 8 }, square);
+// => [16, 64]
+```
+
+---
+
+## orderBy
+
+返回一个排序后的新数组，按照 `iteratees` 指定的属性或处理函数排序，排序方向由 `orders` 指定（`asc` 升序 / `desc` 降序）。
+
+```javascript
+var users = [
+  { 'user': 'fred',   'age': 48 },
+  { 'user': 'barney', 'age': 36 },
+  { 'user': 'fred',   'age': 40 },
+  { 'user': 'barney', 'age': 34 }
+];
+
+_.orderBy(users, ['user', 'age'], ['asc', 'desc']);
+// => [
+//   { 'user': 'barney', 'age': 36 },
+//   { 'user': 'barney', 'age': 34 },
+//   { 'user': 'fred',   'age': 48 },
+//   { 'user': 'fred',   'age': 40 }
+// ]
+```
+
+---
+
+## partition
+
+根据 `predicate` 的断言结果，将集合分成两组：第一组是断言为 truthy 的元素，第二组是断言为 falsy 的元素，返回包含这两组的数组。
+
+```javascript
+var users = [
+  { 'user': 'barney',  'age': 36, 'active': false },
+  { 'user': 'fred',    'age': 40, 'active': true },
+  { 'user': 'pebbles', 'age': 1,  'active': false }
+];
+
+_.partition(users, function(o) { return o.active; });
+// => [
+//   [{ 'user': 'fred', 'age': 40, 'active': true }],
+//   [
+//     { 'user': 'barney', 'age': 36, 'active': false },
+//     { 'user': 'pebbles', 'age': 1, 'active': false }
+//   ]
+// ]
+```
+
+---
+
+## reduce
+
+通过 `iteratee` 遍历集合，将结果汇总为单个返回值。`iteratee` 接收四个参数：(accumulator, value, index|key, collection)。
+
+```javascript
+_.reduce([1, 2, 3], function(sum, n) {
+  return sum + n;
+}, 0);
+// => 6
+
+_.reduce({ 'a': 1, 'b': 2, 'c': 1 }, function(result, value, key) {
+  (result[value] || (result[value] = [])).push(key);
+  return result;
+}, {});
+// => { '1': ['a', 'c'], '2': ['b'] }
+```
+
+---
+
+## reject
+
+与 `filter` 相反，返回所有 <Mark bold>未通过</Mark> `predicate` 断言检查的元素组成的新数组。
+
+```javascript
+var users = [
+  { 'user': 'barney', 'age': 36, 'active': true },
+  { 'user': 'fred',   'age': 40, 'active': false }
+];
+
+_.reject(users, function(o) { return o.active; });
+// => [{ 'user': 'fred', 'age': 40, 'active': false }]
+
+_.reject(users, { 'age': 36 });
+// => [{ 'user': 'fred', 'age': 40, 'active': false }]
+```
+
+---
+
+## sample
+
+从集合中随机返回一个元素。
+
+```javascript
+_.sample([1, 2, 3, 4]);
+// => 2  (随机结果)
+
+_.sample({ 'a': 1, 'b': 2, 'c': 3 });
+// => 3  (随机结果)
+```
+
+---
+
+## shuffle
+
+创建一个数组，其中元素顺序被随机打乱。
+
+```javascript
+_.shuffle([1, 2, 3, 4]);
+// => [4, 1, 3, 2]  (随机结果)
+
+_.shuffle({ 'a': 1, 'b': 2, 'c': 3 });
+// => [2, 1, 3]  (随机结果)
+```
+
+---
+
+## size
+
+返回集合的长度（数组为元素个数，对象为自身可枚举属性个数，字符串为字符长度）。
+
+```javascript
+_.size([1, 2, 3]);
+// => 3
+
+_.size({ 'a': 1, 'b': 2 });
+// => 2
+
+_.size('pebbles');
+// => 7
+```
+
+---
+
+## some
+
+检查集合中是否有<Mark bold>至少一个</Mark>元素通过 `predicate` 的断言检查，有则返回 `true`，否则返回 `false`。
+
+```javascript
+_.some([null, 0, 'yes', false], Boolean);
+// => true
+
+var users = [
+  { 'user': 'barney', 'active': true },
+  { 'user': 'fred',   'active': false }
+];
+
+_.some(users, { 'active': false });
+// => true
+```
+
+---
+
+## sortBy
+
+返回一个排序后的新数组，按照 `iteratees` 指定的属性或处理函数升序排列。
+
+```javascript
+var users = [
+  { 'user': 'fred',   'age': 48 },
+  { 'user': 'barney', 'age': 36 },
+  { 'user': 'fred',   'age': 40 },
+  { 'user': 'barney', 'age': 34 }
+];
+
+_.sortBy(users, [function(o) { return o.user; }]);
+// => [
+//   { 'user': 'barney', 'age': 36 },
+//   { 'user': 'barney', 'age': 34 },
+//   { 'user': 'fred',   'age': 48 },
+//   { 'user': 'fred',   'age': 40 }
+// ]
+
+_.sortBy(users, ['user', 'age']);
+// => [
+//   { 'user': 'barney', 'age': 34 },
+//   { 'user': 'barney', 'age': 36 },
+//   { 'user': 'fred',   'age': 40 },
+//   { 'user': 'fred',   'age': 48 }
+// ]
+```
+
+---
+
+## 相关参考
+
+你可以继续阅读以下相关文档，了解更多 Lodash API 用法：
+
+<BulletedList>
+    <Link href="/api-reference/array">Array Methods</Link>
+</BulletedList>
+<BulletedList>
+    <Link href="/api-reference/object">Object Methods</Link>
+</BulletedList>
+<BulletedList>
+    <Link href="/api-reference/lang">Lang Methods</Link>
+</BulletedList>
+<BulletedList>
+    <Link href="/api-reference/function">Function Methods</Link>
+</BulletedList>
