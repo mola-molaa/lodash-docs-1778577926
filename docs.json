@@ -1,0 +1,81 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "colors": {
+    "dark": "#2980b9",
+    "light": "#5dade2",
+    "primary": "#3498db"
+  },
+  "favicon": "/favicon.svg",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "name": "Lodash Documentation",
+  "navbar": {
+    "primary": {
+      "href": "https://github.com/mola-molaa/lodash",
+      "label": "GitHub",
+      "type": "button"
+    }
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "index",
+              "quickstart",
+              "installation"
+            ]
+          },
+          {
+            "group": "Core Concepts",
+            "pages": [
+              "concepts/architecture",
+              "concepts/fp"
+            ]
+          }
+        ],
+        "tab": "Guides"
+      },
+      {
+        "groups": [
+          {
+            "group": "Core Modules",
+            "pages": [
+              "api-reference/array",
+              "api-reference/collection",
+              "api-reference/object"
+            ]
+          },
+          {
+            "group": "Utilities",
+            "pages": [
+              "api-reference/lang",
+              "api-reference/math",
+              "api-reference/function",
+              "api-reference/number",
+              "api-reference/date"
+            ]
+          }
+        ],
+        "tab": "API Reference"
+      },
+      {
+        "groups": [
+          {
+            "group": "Community",
+            "pages": [
+              "project/governance",
+              "project/contributing"
+            ]
+          }
+        ],
+        "tab": "Project"
+      }
+    ]
+  },
+  "theme": "mint"
+}
