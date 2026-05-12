@@ -1,0 +1,159 @@
+---
+title: Quickstart
+icon: 🚀
+---
+
+Lodash 是一个一致性、模块化、高性能的 JavaScript 实用工具库。本页将演示如何在浏览器和 Node.js 环境中快速上手使用 Lodash，包括基本引入方式和常见用法。
+
+## 浏览器环境
+
+可以直接通过 CDN 引入 Lodash，无需额外构建工具即可体验核心能力。在 HTML 文件中添加如下脚本标签即可引入：
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+```
+
+引入后，全局会暴露 `_` 变量，你可以直接在脚本中使用 Lodash 的 API。例如，实现数组去重：
+
+```html
+<script>
+  var arr = [1, 2, 2, 3, 3, 4];
+  var uniqueArr = _.uniq(arr);
+  console.log(uniqueArr); // 输出: [1, 2, 3, 4]
+</script>
+```
+
+你也可以使用按需加载的方式，只引入需要的模块以减少体积：
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/uniq.min.js"></script>
+<script>
+  // 此时仅可使用 _.uniq 方法
+  console.log(_.uniq([1, 1, 2])); // 输出: [1, 2]
+</script>
+```
+
+## Node.js 环境
+
+在 Node.js 项目中，首先需要通过 npm 安装 Lodash：
+
+```bash
+npm install lodash
+```
+
+完成安装后，即可在代码中引入并使用。Lodash 支持多种引入方式，最常见的有两种：
+
+### 完整引入
+
+```javascript
+const _ = require('lodash');
+
+const users = [
+  { 'user': '张三', 'age': 25 },
+  { 'user': '李四', 'age': 30 },
+  { 'user': '王五', 'age': 25 }
+];
+
+// 按 age 字段对数组进行分组
+const grouped = _.groupBy(users, 'age');
+console.log(grouped);
+// 输出: { '25': [{ user: '张三', age: 25 }, { user: '王五', age: 25 }], '30': [{ user: '李四', age: 30 }] }
+```
+
+### 按需引入
+
+如果只需要使用部分方法，可以单独引入对应模块以减少打包体积：
+
+```javascript
+const uniq = require('lodash/uniq');
+const debounce = require('lodash/debounce');
+
+// 数组去重
+console.log(uniq([1, 2, 2, 3])); // 输出: [1, 2, 3]
+
+// 防抖函数
+const handleInput = debounce(() => {
+  console.log('输入结束');
+}, 500);
+```
+
+## 常见用法示例
+
+下面是一些 Lodash 在开发中的高频使用场景，覆盖不同功能分类：
+
+### 数组操作
+
+使用 `_.chunk` 方法可以将数组按指定长度拆分为多个子数组：
+
+```javascript
+const _ = require('lodash');
+const arr = [1, 2, 3, 4, 5, 6];
+console.log(_.chunk(arr, 2)); // 输出: [[1, 2], [3, 4], [5, 6]]
+```
+
+更多数组相关 API 可参考 <Link href="/api-reference/array">数组 API 参考</Link>。
+
+### 对象操作
+
+使用 `_.get` 可以安全地访问嵌套对象属性，避免空值报错：
+
+```javascript
+const obj = { a: { b: { c: 1 } } };
+console.log(_.get(obj, 'a.b.c')); // 输出: 1
+console.log(_.get(obj, 'a.b.d', '默认值')); // 输出: 默认值
+```
+
+更多对象相关 API 可参考 <Link href="/api-reference/object">对象 API 参考</Link>。
+
+### 函数操作
+
+使用 `_.debounce` 可以实现函数防抖，常用于搜索输入、窗口 resize 等场景：
+
+```javascript
+const _ = require('lodash');
+const log = () => console.log('触发了');
+const debouncedLog = _.debounce(log, 1000);
+// 连续调用时，只有最后一次调用后等待 1 秒才会执行
+debouncedLog();
+debouncedLog();
+debouncedLog();
+```
+
+更多函数相关 API 可参考 <Link href="/api-reference/function">函数 API 参考</Link>。
+
+### 函数式编程
+
+Lodash 提供了 `lodash/fp` 模块，支持函数式编程风格，方法默认柯里化且参数顺序调整为数据最后：
+
+```javascript
+const fp = require('lodash/fp');
+const users = [
+  { name: '张三', age: 25 },
+  { name: '李四', age: 30 }
+];
+// 先映射获取 name，再取第一个元素
+const firstName = fp.flow(
+  fp.map('name'),
+  fp.first
+);
+console.log(firstName(users)); // 输出: 张三
+```
+
+更多函数式编程相关内容可参考 <Link href="/concepts/fp">函数式编程指南</Link>。
+
+## 下一步
+
+你可以继续阅读以下页面深入了解 Lodash：
+
+<BulletedList>
+    <Link href="/installation">安装指南</Link>，了解不同环境下的详细安装方式与版本选择
+</BulletedList>
+<BulletedList>
+    <Link href="/concepts/architecture">架构说明</Link>，了解 Lodash 的内部设计与模块结构
+</BulletedList>
+<BulletedList>
+    <Link href="/api-reference/lang">语言工具 API</Link>，查看更多类型判断与数据操作方法
+</BulletedList>
+<BulletedList>
+    <Link href="/project/contributing">贡献指南</Link>，了解如何参与 Lodash 项目开发
+</BulletedList>
