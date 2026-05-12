@@ -1,0 +1,375 @@
+---
+title: Lang Methods
+icon: 🔤
+---
+
+<Heading level="1">
+    Lang Methods
+</Heading>
+
+<Paragraph>
+    <Mark bold>Lang</Mark> 模块提供了丰富的值类型检查、比较与转换方法，是 Lodash 类型相关工具的核心集合。以下方法适用于日常类型判断、数据深拷贝、值比较与基础类型转换等场景。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    castArray
+</Heading>
+
+<Paragraph>
+    如果传入的值不是数组，则将其包装为数组；如果已经是数组，则直接返回该数组。
+</Paragraph>
+
+<Table>
+    <TableRow>
+        <TableCell>
+            参数
+        </TableCell>
+        <TableCell>
+            说明
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            value
+        </TableCell>
+        <TableCell>
+            任意待处理的值
+        </TableCell>
+    </TableRow>
+</Table>
+
+<Paragraph>
+    示例：<Mark color="blue">castArray(1)</Mark> 返回 <Mark color="green">[1]</Mark>；<Mark color="blue">castArray([1, 2])</Mark> 返回 <Mark color="green">[1, 2]</Mark>。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    clone / cloneDeep
+</Heading>
+
+<Paragraph>
+    <Mark bold>clone</Mark> 执行浅拷贝，仅复制对象或数组的第一层；<Mark bold>cloneDeep</Mark> 执行深拷贝，递归复制所有嵌套层级，生成完全独立的副本。
+</Paragraph>
+
+<Table>
+    <TableRow>
+        <TableCell>
+            方法
+        </TableCell>
+        <TableCell>
+            拷贝深度
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            clone
+        </TableCell>
+        <TableCell>
+            浅拷贝
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            cloneDeep
+        </TableCell>
+        <TableCell>
+            深拷贝
+        </TableCell>
+    </TableRow>
+</Table>
+
+<Paragraph>
+    示例：<Mark color="blue">clone({ a: 1, b: { c: 2 } })</Mark> 修改拷贝结果的 <Mark color="blue">b.c</Mark> 会影响原对象；而 <Mark color="blue">cloneDeep</Mark> 不会。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    conformsTo
+</Heading>
+
+<Paragraph>
+    检查一个对象是否符合给定的条件对象要求。条件对象中的每个属性对应一个断言函数，只有对象所有属性都通过对应断言时才返回 <Mark color="blue">true</Mark>。
+</Paragraph>
+
+<Paragraph>
+    示例：<Mark color="blue">conformsTo({ a: 1, b: 2 }, { a: n => n > 0, b: n => n > 1 })</Mark> 返回 <Mark color="green">true</Mark>。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    eq / gt / gte / lt / lte
+</Heading>
+
+<Paragraph>
+    这组方法用于值之间的比较：
+</Paragraph>
+
+<BulletedList>
+    <Mark bold>eq</Mark>：判断两个值是否完全相等，遵循 SameValueZero 语义
+</BulletedList>
+<BulletedList>
+    <Mark bold>gt</Mark>：判断第一个值是否大于第二个值
+</BulletedList>
+<BulletedList>
+    <Mark bold>gte</Mark>：判断第一个值是否大于或等于第二个值
+</BulletedList>
+<BulletedList>
+    <Mark bold>lt</Mark>：判断第一个值是否小于第二个值
+</BulletedList>
+<BulletedList>
+    <Mark bold>lte</Mark>：判断第一个值是否小于或等于第二个值
+</BulletedList>
+
+<Paragraph>
+    示例：<Mark color="blue">gt(5, 3)</Mark> 返回 <Mark color="green">true</Mark>；<Mark color="blue">lte(2, 2)</Mark> 返回 <Mark color="green">true</Mark>。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    isArguments
+</Heading>
+
+<Paragraph>
+    检查一个值是否为 <Mark color="blue">arguments</Mark> 对象。
+</Paragraph>
+
+<Paragraph>
+    示例：<Mark color="blue">isArguments(function() { return arguments }())</Mark> 返回 <Mark color="green">true</Mark>。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    isArray / isArrayLike
+</Heading>
+
+<Paragraph>
+    <Mark bold>isArray</Mark> 检查值是否为数组；<Mark bold>isArrayLike</Mark> 检查值是否类似数组，即具有 <Mark color="blue">length</Mark> 属性且为非负整数的对象（如字符串、arguments 等）。
+</Paragraph>
+
+<Paragraph>
+    示例：<Mark color="blue">isArray([1, 2])</Mark> 返回 <Mark color="green">true</Mark>；<Mark color="blue">isArrayLike("abc")</Mark> 返回 <Mark color="green">true</Mark>。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    isBoolean
+</Heading>
+
+<Paragraph>
+    检查一个值是否为布尔类型（<Mark color="blue">true</Mark> 或 <Mark color="blue">false</Mark>）。
+</Paragraph>
+
+<Paragraph>
+    示例：<Mark color="blue">isBoolean(false)</Mark> 返回 <Mark color="green">true</Mark>；<Mark color="blue">isBoolean(0)</Mark> 返回 <Mark color="green">false</Mark>。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    isDate
+</Heading>
+
+<Paragraph>
+    检查一个值是否为 <Mark color="blue">Date</Mark> 对象实例。
+</Paragraph>
+
+<Paragraph>
+    示例：<Mark color="blue">isDate(new Date())</Mark> 返回 <Mark color="green">true</Mark>。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    isEmpty
+</Heading>
+
+<Paragraph>
+    检查一个值是否为空。对于数组、类数组、字符串，长度为 0 时为空；对于对象，自身可枚举属性数量为 0 时为空；<Mark color="blue">null</Mark>、<Mark color="blue">undefined</Mark> 也视为空。
+</Paragraph>
+
+<Paragraph>
+    示例：<Mark color="blue">isEmpty([])</Mark> 返回 <Mark color="green">true</Mark>；<Mark color="blue">isEmpty({})</Mark> 返回 <Mark color="green">true</Mark>。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    isEqual
+</Heading>
+
+<Paragraph>
+    执行深比较，判断两个值是否在内容上完全相等，支持对象、数组、嵌套结构的递归比较。
+</Paragraph>
+
+<Paragraph>
+    示例：<Mark color="blue">isEqual({ a: [1, 2] }, { a: [1, 2] })</Mark> 返回 <Mark color="green">true</Mark>。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    isError
+</Heading>
+
+<Paragraph>
+    检查一个值是否为 <Mark color="blue">Error</Mark> 对象或其子类实例。
+</Paragraph>
+
+<Paragraph>
+    示例：<Mark color="blue">isError(new Error("fail"))</Mark> 返回 <Mark color="green">true</Mark>。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    isFinite
+</Heading>
+
+<Paragraph>
+    检查一个值是否为有限数值（排除 <Mark color="blue">Infinity</Mark>、<Mark color="blue">-Infinity</Mark> 和 <Mark color="blue">NaN</Mark>）。
+</Paragraph>
+
+<Paragraph>
+    示例：<Mark color="blue">isFinite(10)</Mark> 返回 <Mark color="green">true</Mark>；<Mark color="blue">isFinite(Infinity)</Mark> 返回 <Mark color="green">false</Mark>。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    isFunction
+</Heading>
+
+<Paragraph>
+    检查一个值是否为函数类型。
+</Paragraph>
+
+<Paragraph>
+    示例：<Mark color="blue">isFunction(() => {})</Mark> 返回 <Mark color="green">true</Mark>。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    isInteger
+</Heading>
+
+<Paragraph>
+    检查一个值是否为整数。
+</Paragraph>
+
+<Paragraph>
+    示例：<Mark color="blue">isInteger(3)</Mark> 返回 <Mark color="green">true</Mark>；<Mark color="blue">isInteger(3.5)</Mark> 返回 <Mark color="green">false</Mark>。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    isNil / isNull / isUndefined
+</Heading>
+
+<Paragraph>
+    这三个方法用于检查值是否为空值：
+</Paragraph>
+
+<BulletedList>
+    <Mark bold>isNil</Mark>：检查值是否为 <Mark color="blue">null</Mark> 或 <Mark color="blue">undefined</Mark>
+</BulletedList>
+<BulletedList>
+    <Mark bold>isNull</Mark>：检查值是否为 <Mark color="blue">null</Mark>
+</BulletedList>
+<BulletedList>
+    <Mark bold>isUndefined</Mark>：检查值是否为 <Mark color="blue">undefined</Mark>
+</BulletedList>
+
+<Paragraph>
+    示例：<Mark color="blue">isNil(null)</Mark> 返回 <Mark color="green">true</Mark>；<Mark color="blue">isUndefined(void 0)</Mark> 返回 <Mark color="green">true</Mark>。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    isNumber / isString
+</Heading>
+
+<Paragraph>
+    <Mark bold>isNumber</Mark> 检查值是否为数值类型；<Mark bold>isString</Mark> 检查值是否为字符串类型。
+</Paragraph>
+
+<Paragraph>
+    示例：<Mark color="blue">isNumber(NaN)</Mark> 返回 <Mark color="green">true</Mark>；<Mark color="blue">isString("hello")</Mark> 返回 <Mark color="green">true</Mark>。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    isObject / isPlainObject
+</Heading>
+
+<Paragraph>
+    <Mark bold>isObject</Mark> 检查值是否为对象类型（包括数组、函数、对象等，排除 <Mark color="blue">null</Mark>）；<Mark bold>isPlainObject</Mark> 检查值是否为普通对象字面量（由 <Mark color="blue">Object</Mark> 构造函数创建或原型为 <Mark color="blue">null</Mark> 的对象）。
+</Paragraph>
+
+<Paragraph>
+    示例：<Mark color="blue">isObject([1, 2])</Mark> 返回 <Mark color="green">true</Mark>；<Mark color="blue">isPlainObject({})</Mark> 返回 <Mark color="green">true</Mark>。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    toArray / toFinite / toInteger / toNumber / toString
+</Heading>
+
+<Paragraph>
+    这组方法用于值的类型转换：
+</Paragraph>
+
+<BulletedList>
+    <Mark bold>toArray</Mark>：将值转换为数组，支持对象、类数组、字符串等
+</BulletedList>
+<BulletedList>
+    <Mark bold>toFinite</Mark>：将值转换为有限数值，超出范围的值会被转为边界值
+</BulletedList>
+<BulletedList>
+    <Mark bold>toInteger</Mark>：将值转换为整数
+</BulletedList>
+<BulletedList>
+    <Mark bold>toNumber</Mark>：将值转换为数值
+</BulletedList>
+<BulletedList>
+    <Mark bold>toString</Mark>：将值转换为字符串
+</BulletedList>
+
+<Paragraph>
+    示例：<Mark color="blue">toArray("abc")</Mark> 返回 <Mark color="green">["a", "b", "c"]</Mark>；<Mark color="blue">toInteger("3.9")</Mark> 返回 <Mark color="green">3</Mark>。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    相关参考
+</Heading>
+
+<Paragraph>
+    你还可以查阅以下相关 API 文档：
+</Paragraph>
+
+<BulletedList>
+    <Link href="/api-reference/array">Array Methods</Link>：数组相关操作方法
+</BulletedList>
+<BulletedList>
+    <Link href="/api-reference/object">Object Methods</Link>：对象相关操作方法
+</BulletedList>
+<BulletedList>
+    <Link href="/api-reference/number">Number Methods</Link>：数值相关处理方法
+</BulletedList>
+<BulletedList>
+    <Link href="/concepts/architecture">架构概览</Link>：了解 Lodash 整体设计
+</BulletedList>
