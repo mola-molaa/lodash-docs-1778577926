@@ -1,0 +1,250 @@
+---
+title: Function Methods
+icon: ⚙️
+---
+
+本页汇总 Lodash 中用于 <Mark bold>函数操作</Mark> 的核心 API，涵盖函数包装、节流防抖、柯里化、参数处理等常见场景，适合在业务开发中快速查阅与组合使用。
+
+<Heading level="2">
+    函数包装与调用控制
+</Heading>
+
+<Heading level="3">
+    after
+</Heading>
+
+<Paragraph>
+    <Mark bold>after</Mark>(n, func) 创建一个函数，在调用 <Mark bold>n</Mark> 次后才真正执行 <Mark bold>func</Mark>。
+</Paragraph>
+
+<Paragraph>
+    常用于需要等待多次异步回调完成后再执行的场景。
+</Paragraph>
+
+<Heading level="3">
+    before
+</Heading>
+
+<Paragraph>
+    <Mark bold>before</Mark>(n, func) 创建一个函数，最多只执行 <Mark bold>n - 1</Mark> 次，之后始终返回最后一次执行的结果。
+</Paragraph>
+
+<Heading level="3">
+    once
+</Heading>
+
+<Paragraph>
+    <Mark bold>once</Mark>(func) 等价于 <Mark bold>before(2, func)</Mark>，确保函数只执行一次。
+</Paragraph>
+
+<Heading level="3">
+    bind
+</Heading>
+
+<Paragraph>
+    <Mark bold>bind</Mark>(func, thisArg, [partials]) 创建一个绑定了 <Mark bold>this</Mark> 和部分参数的函数。
+</Paragraph>
+
+<Heading level="3">
+    bindKey
+</Heading>
+
+<Paragraph>
+    <Mark bold>bindKey</Mark>(object, key, [partials]) 创建一个函数，在调用时从 <Mark bold>object[key]</Mark> 获取目标函数并绑定 <Mark bold>this</Mark> 与部分参数。
+</Paragraph>
+
+<Heading level="3">
+    wrap
+</Heading>
+
+<Paragraph>
+    <Mark bold>wrap</Mark>(func, wrapper) 创建一个函数，使用 <Mark bold>wrapper</Mark> 包装 <Mark bold>func</Mark>，<Mark bold>wrapper</Mark> 会接收原函数作为第一个参数。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    节流与防抖
+</Heading>
+
+<Heading level="3">
+    throttle
+</Heading>
+
+<Paragraph>
+    <Mark bold>throttle</Mark>(func, [wait=0], [options={}]) 创建一个节流函数，在 <Mark bold>wait</Mark> 毫秒内最多执行一次 <Mark bold>func</Mark>。
+</Paragraph>
+
+<Paragraph>
+    通常用于滚动、窗口调整等高频触发场景。
+</Paragraph>
+
+<Heading level="3">
+    debounce
+</Heading>
+
+<Paragraph>
+    <Mark bold>debounce</Mark>(func, [wait=0], [options={}]) 创建一个防抖函数，延迟 <Mark bold>wait</Mark> 毫秒后执行 <Mark bold>func</Mark>，若在等待期间再次调用则重新计时。
+</Paragraph>
+
+<Paragraph>
+    常用于搜索输入、表单校验等场景。
+</Paragraph>
+
+<Heading level="3">
+    defer
+</Heading>
+
+<Paragraph>
+    <Mark bold>defer</Mark>(func, [args]) 使用 <Mark bold>setTimeout</Mark> 延迟调用 <Mark bold>func</Mark>，默认延迟为 0 毫秒。
+</Paragraph>
+
+<Heading level="3">
+    delay
+</Heading>
+
+<Paragraph>
+    <Mark bold>delay</Mark>(func, wait, [args]) 延迟 <Mark bold>wait</Mark> 毫秒后调用 <Mark bold>func</Mark>，并传入可选参数。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    柯里化与参数变换
+</Heading>
+
+<Heading level="3">
+    curry
+</Heading>
+
+<Paragraph>
+    <Mark bold>curry</Mark>(func, [arity=func.length]) 将函数转换为<Mark bold>柯里化</Mark>函数，支持逐步传参。
+</Paragraph>
+
+<Heading level="3">
+    curryRight
+</Heading>
+
+<Paragraph>
+    <Mark bold>curryRight</Mark>(func, [arity=func.length]) 类似 <Mark bold>curry</Mark>，但从<Mark bold>右侧</Mark>开始逐步传参。
+</Paragraph>
+
+<Heading level="3">
+    partial
+</Heading>
+
+<Paragraph>
+    <Mark bold>partial</Mark>(func, [partials]) 创建一个函数，固定 <Mark bold>func</Mark> 的部分参数（从左到右）。
+</Paragraph>
+
+<Heading level="3">
+    partialRight
+</Heading>
+
+<Paragraph>
+    <Mark bold>partialRight</Mark>(func, [partials]) 创建一个函数，固定 <Mark bold>func</Mark> 的部分参数（从右到左）。
+</Paragraph>
+
+<Heading level="3">
+    rearg
+</Heading>
+
+<Paragraph>
+    <Mark bold>rearg</Mark>(func, indexes) 创建一个函数，按照 <Mark bold>indexes</Mark> 指定的顺序重新排列参数位置。
+</Paragraph>
+
+<Heading level="3">
+    flip
+</Heading>
+
+<Paragraph>
+    <Mark bold>flip</Mark>(func) 创建一个函数，调用时<Mark bold>反转</Mark>参数顺序。
+</Paragraph>
+
+<Heading level="3">
+    rest
+</Heading>
+
+<Paragraph>
+    <Mark bold>rest</Mark>(func, [start=func.length-1]) 将剩余参数收集为数组，类似 ES 的 rest 参数。
+</Paragraph>
+
+<Heading level="3">
+    spread
+</Heading>
+
+<Paragraph>
+    <Mark bold>spread</Mark>(func, [start=0]) 将一个数组参数“展开”为函数的多个参数。
+</Paragraph>
+
+<Heading level="3">
+    unary
+</Heading>
+
+<Paragraph>
+    <Mark bold>unary</Mark>(func) 创建一个只接受<Mark bold>一个参数</Mark>的函数。
+</Paragraph>
+
+<Heading level="3">
+    ary
+</Heading>
+
+<Paragraph>
+    <Mark bold>ary</Mark>(func, [n=func.length]) 创建一个函数，最多只接受 <Mark bold>n</Mark> 个参数。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    其它实用函数
+</Heading>
+
+<Heading level="3">
+    memoize
+</Heading>
+
+<Paragraph>
+    <Mark bold>memoize</Mark>(func, [resolver]) 创建一个<Mark bold>记忆化</Mark>函数，缓存计算结果以提升性能。
+</Paragraph>
+
+<Heading level="3">
+    negate
+</Heading>
+
+<Paragraph>
+    <Mark bold>negate</Mark>(predicate) 创建一个函数，对断言函数 <Mark bold>predicate</Mark> 的结果取反。
+</Paragraph>
+
+<Heading level="3">
+    overArgs
+</Heading>
+
+<Paragraph>
+    <Mark bold>overArgs</Mark>(func, [transforms=[_.identity]]) 创建一个函数，在调用 <Mark bold>func</Mark> 前使用对应的 <Mark bold>transforms</Mark> 对参数进行转换。
+</Paragraph>
+
+<Divider />
+
+<Heading level="2">
+    相关链接
+</Heading>
+
+<Paragraph>
+    你可以继续阅读以下页面来了解更多 Lodash API：
+</Paragraph>
+
+<BulletedList>
+    <Link href="/api-reference/array">Array Methods</Link>
+</BulletedList>
+<BulletedList>
+    <Link href="/api-reference/collection">Collection Methods</Link>
+</BulletedList>
+<BulletedList>
+    <Link href="/api-reference/object">Object Methods</Link>
+</BulletedList>
+<BulletedList>
+    <Link href="/concepts/fp">FP 函数式编程</Link>
+</BulletedList>
+<BulletedList>
+    <Link href="/index">首页</Link>
+</BulletedList>
