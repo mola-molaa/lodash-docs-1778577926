@@ -1,0 +1,198 @@
+---
+title: Introduction
+icon: 📘
+cover: https://lodash.com/cover.png
+---
+
+Lodash 是一个一致性、模块化、高性能的 JavaScript 实用工具库，旨在为开发者提供一套经过充分测试、文档完善且跨环境兼容的工具函数集合，大幅降低日常开发中与数据结构操作、类型判断、函数式编程相关的重复劳动成本。
+
+## 项目定位
+
+Lodash 诞生于解决早期 JavaScript 标准库能力不足、不同浏览器 / 运行环境 API 行为不一致的问题，经过多年迭代已经成为 JavaScript 生态中最广泛使用的工具库之一。它的核心定位可以概括为：
+
+<BulletedList>
+    补充 JavaScript 原生能力的缺失，提供全面覆盖数组、对象、函数、字符串等常见数据类型的操作工具
+    <BulletedList>
+        例如原生 JavaScript 早期没有深拷贝方法，Lodash 提供了稳定可靠的 <Mark color="blue">cloneDeep</Mark> 函数
+    </BulletedList>
+</BulletedList>
+<BulletedList>
+    保证 API 行为的一致性，不同环境下调用相同函数可以得到符合预期的结果，避免开发者处理兼容性逻辑
+</BulletedList>
+<BulletedList>
+    提供模块化与函数式编程友好的能力，支持按需引入、函数组合、柯里化等高级用法，适配不同规模的项目需求
+</BulletedList>
+
+## 核心功能
+
+Lodash 的功能模块覆盖了绝大多数日常开发场景，主要可以分为以下几大类：
+
+<Table>
+    <TableRow>
+        <TableCell>
+            模块分类
+        </TableCell>
+        <TableCell>
+            核心能力
+        </TableCell>
+        <TableCell>
+            典型 API 示例
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            数组操作
+        </TableCell>
+        <TableCell>
+            数组去重、扁平化、分块、差集、交集、排序等数组专属操作
+        </TableCell>
+        <TableCell>
+            <Link href="/api-reference/array">chunk、compact、difference、flatten</Link>
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            集合操作
+        </TableCell>
+        <TableCell>
+            对数组和对象统一的迭代、过滤、映射、分组、计数等操作
+        </TableCell>
+        <TableCell>
+            <Link href="/api-reference/collection">forEach、filter、map、groupBy、countBy</Link>
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            对象操作
+        </TableCell>
+        <TableCell>
+            对象深拷贝、合并、属性获取、键值对转换、默认属性填充等
+        </TableCell>
+        <TableCell>
+            <Link href="/api-reference/object">cloneDeep、merge、get、set、defaults</Link>
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            类型判断
+        </TableCell>
+        <TableCell>
+            精准判断 JavaScript 各类数据类型的归属，避免原生 typeof 的缺陷
+        </TableCell>
+        <TableCell>
+            <Link href="/api-reference/lang">isArray、isObject、isFunction、isNil</Link>
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            函数工具
+        </TableCell>
+        <TableCell>
+            函数节流、防抖、柯里化、函数组合、多次执行控制等
+        </TableCell>
+        <TableCell>
+            <Link href="/api-reference/function">debounce、throttle、curry、flow、once</Link>
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            数学与数值
+        </TableCell>
+        <TableCell>
+            数值范围约束、随机数生成、数值运算等
+        </TableCell>
+        <TableCell>
+            <Link href="/api-reference/math">clamp、random、max、min、sum</Link>
+            <Link href="/api-reference/number">inRange、parseInt</Link>
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            日期工具
+        </TableCell>
+        <TableCell>
+            日期格式化、日期差值计算等
+        </TableCell>
+        <TableCell>
+            <Link href="/api-reference/date">now、formatDate</Link>
+        </TableCell>
+    </TableRow>
+</Table>
+
+同时 Lodash 还提供了 FP 模块，将函数转换为自动柯里化、参数顺序更友好的函数式编程风格，适合需要函数组合、管道处理的场景，更多细节可以参考 <Link href="/concepts/fp">函数式编程模块介绍</Link>。
+
+## 适用场景
+
+Lodash 几乎适用于所有使用 JavaScript 开发的场景，无论是前端浏览器项目、Node.js 服务端项目还是跨端应用：
+
+<NumberedList>
+    快速原型开发：可以直接使用成熟工具函数快速实现业务逻辑，无需重复编写基础工具代码
+</NumberedList>
+<NumberedList>
+    大型项目维护：统一的 API 风格可以降低团队协作中的认知成本，减少自定义工具函数的维护负担
+</NumberedList>
+<NumberedList>
+    兼容性要求高的项目：Lodash 内部处理了不同环境的边界情况，可以避免开发者手动编写兼容性代码
+</NumberedList>
+<NumberedList>
+    函数式编程场景：通过 FP 模块可以轻松实现函数组合、柯里化等函数式编程模式，提升代码的可测试性和可维护性
+</NumberedList>
+
+## 与同类库的对比
+
+目前社区中常见的 JavaScript 工具库除了 Lodash 之外，还有 Underscore、Ramda 等，它们的定位和特点有所不同：
+
+<Table>
+    <TableRow>
+        <TableCell>
+            库名
+        </TableCell>
+        <TableCell>
+            核心特点
+        </TableCell>
+        <TableCell>
+            适用场景
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            Lodash
+        </TableCell>
+        <TableCell>
+            功能全面、性能优异、文档完善、模块化支持好、同时支持命令式和函数式风格
+        </TableCell>
+        <TableCell>
+            绝大多数 JavaScript 项目，尤其是对兼容性和模块化有要求的场景
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            Underscore
+        </TableCell>
+        <TableCell>
+            Lodash 的前身，API 风格类似但功能覆盖不如 Lodash 全面，性能也相对较弱，目前已经很少新项目使用
+        </TableCell>
+        <TableCell>
+            维护老项目时的兼容选择
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            Ramda
+        </TableCell>
+        <TableCell>
+            纯函数式编程优先设计，所有函数默认柯里化，参数顺序完全为函数组合优化，没有命令式风格的 API
+        </TableCell>
+        <TableCell>
+            纯函数式编程场景，对函数式范式有强要求的项目
+        </TableCell>
+    </TableRow>
+</Table>
+
+<Callout icon="💡" blockColor="light_blue" borderColor="blue">
+    如果你是新接触 Lodash 的开发者，建议先阅读 <Link href="/quickstart">快速上手</Link> 了解基础用法，或参考 <Link href="/installation">安装指南</Link> 将 Lodash 集成到你的项目中。你也可以查看 <Link href="/concepts/architecture">架构设计</Link> 了解 Lodash 的内部实现思路。
+</Callout>
+
+## 项目治理与贡献
+
+Lodash 是一个开源项目，遵循开放透明的治理规则，如果你希望参与项目贡献或者了解项目的维护机制，可以查看 <Link href="/project/governance">项目治理</Link> 和 <Link href="/project/contributing">贡献指南</Link> 获取更多信息。
