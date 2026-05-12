@@ -1,0 +1,101 @@
+---
+title: Date Methods
+icon: 📅
+---
+
+# Date Methods
+
+Lodash 提供了少量与日期和当前时间相关的工具方法，以下为当前文档已覆盖的 API 说明。
+
+---
+
+## now
+
+返回当前时间戳（Unix 时间戳，单位：毫秒）。
+
+该方法等价于 `Date.now()`，在 Lodash 中作为工具函数统一暴露，便于在函数式编程或 FP 模式下使用。
+
+### 函数签名
+
+```ts
+function now(): number
+```
+
+### 返回值
+
+<Table>
+    <TableRow>
+        <TableCell>
+            类型
+        </TableCell>
+        <TableCell>
+            说明
+        </TableCell>
+    </TableRow>
+    <TableRow>
+        <TableCell>
+            <Mark color="blue">number</Mark>
+        </TableCell>
+        <TableCell>
+            当前时间的毫秒级时间戳
+        </TableCell>
+    </TableRow>
+</Table>
+
+### 示例
+
+```js
+import now from 'lodash/now';
+
+const ts = now();
+// => 例如 1700000000000
+```
+
+### 适用场景
+
+<BulletedList>
+    需要获取当前时间戳，且希望与 Lodash 其他工具函数风格保持一致
+</BulletedList>
+<BulletedList>
+    在 FP 模式或组合函数中统一使用 Lodash API，避免直接依赖全局 Date
+</BulletedList>
+
+---
+
+## 相关文档
+
+更多 API 参考可查看：
+
+<BulletedList>
+    <Link href="/api-reference/array">Array Methods</Link>
+</BulletedList>
+<BulletedList>
+    <Link href="/api-reference/object">Object Methods</Link>
+</BulletedList>
+<BulletedList>
+    <Link href="/api-reference/lang">Lang Methods</Link>
+</BulletedList>
+<BulletedList>
+    <Link href="/api-reference/math">Math Methods</Link>
+</BulletedList>
+<BulletedList>
+    <Link href="/api-reference/function">Function Methods</Link>
+</BulletedList>
+<BulletedList>
+    <Link href="/api-reference/number">Number Methods</Link>
+</BulletedList>
+
+快速上手与项目相关说明：
+
+<BulletedList>
+    <Link href="/quickstart">Quick Start</Link>
+</BulletedList>
+<BulletedList>
+    <Link href="/installation">Installation</Link>
+</BulletedList>
+<BulletedList>
+    <Link href="/concepts/architecture">Architecture</Link>
+</BulletedList>
+<BulletedList>
+    <Link href="/concepts/fp">FP Guide</Link>
+</BulletedList>
